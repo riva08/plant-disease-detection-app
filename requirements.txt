@@ -5,5 +5,6 @@ opencv-python-headless
 pillow
 matplotlib
 gdown
+h5py
 
 
