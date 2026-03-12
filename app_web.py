@@ -17,7 +17,11 @@ if not os.path.exists("leaf_model.h5"):
 
 from tensorflow.keras.models import load_model
 
-model = load_model("leaf_model.h5", compile=False, safe_mode=False)
+model = load_model(
+    "leaf_model.h5",
+    compile=False,
+    custom_objects={}
+)
 
 
 classes = ["early_blight", "late_blight", "healthy"]
@@ -81,6 +85,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
