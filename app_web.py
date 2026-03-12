@@ -21,7 +21,7 @@ if not os.path.exists(MODEL_PATH):
 # -------------------------------
 # Load trained model
 # -------------------------------
-model = load_model(MODEL_PATH, compile=False)
+model = tf.keras.models.load_model(MODEL_PATH, compile=False, safe_mode=False)
 
 # -------------------------------
 # Class labels
@@ -104,6 +104,7 @@ if image is not None:
     ax.set_title("Prediction Confidence")
 
     st.pyplot(fig)
+
 
 
 
