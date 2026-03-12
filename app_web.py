@@ -9,7 +9,7 @@ import gdown
 from tensorflow.keras.models import load_model
 import tensorflow as tf
 
-if true:
+if True:
     gdown.download(
         "https://drive.google.com/uc?id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz",
         "leaf_model.keras",
@@ -82,6 +82,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
