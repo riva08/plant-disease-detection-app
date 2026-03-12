@@ -11,11 +11,11 @@ import tensorflow as tf
 
 if True:
     gdown.download(
-        "https://drive.google.com/uc?id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz",
-        "leaf_model.keras",
-        quiet=False,
-        fuzzy=True
-    )
+    "https://drive.google.com/uc?export=download&id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz",
+    "leaf_model.keras",
+    quiet=False
+)
+  
 
 tf.keras.backend.clear_session()
 
@@ -82,6 +82,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
