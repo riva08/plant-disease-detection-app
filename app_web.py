@@ -1,4 +1,4 @@
-```python
+
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -105,6 +105,7 @@ if image is not None:
 
     st.pyplot(fig)
 ```
+
 
 
 
