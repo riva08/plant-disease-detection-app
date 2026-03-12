@@ -9,17 +9,20 @@ import gdown
 from tensorflow.keras.models import load_model
 import tensorflow as tf
 
-if True:
-    gdown.download(
-    "https://drive.google.com/uc?export=download&id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz",
-    "leaf_model.keras",
-    quiet=False
-)
-  
+import requests
+import os
 
-tf.keras.backend.clear_session()
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz"
+
+if not os.path.exists("leaf_model.keras"):
+    r = requests.get(MODEL_URL)
+    with open("leaf_model.keras", "wb") as f:
+        f.write(r.content)
+
+from tensorflow.keras.models import load_model
 
 model = load_model("leaf_model.keras", compile=False)
+
 
 classes = ["early_blight", "late_blight", "healthy"]
 
@@ -82,6 +85,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
