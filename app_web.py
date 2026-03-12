@@ -7,14 +7,22 @@ import matplotlib.pyplot as plt
 import os
 import gdown
 from tensorflow.keras.models import load_model
+import tensorflow as tf
 
-if not os.path.exists("leaf_model.h5"):
-    gdown.download("https://drive.google.com/uc?id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz", "leaf_model.keras", quiet=False)
-
+if not os.path.exists("leaf_model.keras"):
+    gdown.download(
+        "https://drive.google.com/uc?id=1hKm2kQ-1dFeDgeIHqhBmeEx_IETL75Iz",
+        "leaf_model.keras",
+        quiet=False,
+        fuzzy=True
+    )
 
 tf.keras.backend.clear_session()
 
 model = load_model("leaf_model.keras", compile=False)
+
+classes = ["early_blight", "late_blight", "healthy"]
+
 
 symptoms = {
 "early_blight": "Brown spots with concentric rings on leaves.",
@@ -74,6 +82,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
