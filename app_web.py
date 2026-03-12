@@ -18,15 +18,8 @@ if not os.path.exists(MODEL_PATH):
     url = "https://drive.google.com/uc?id=1oOnRu6MPfHgpUa1aqetQUTeif2Ad3Up5"
     gdown.download(url, MODEL_PATH, quiet=False)
 
-# -------------------------------
 # Load trained model
-# -------------------------------
-model = tf.keras.models.load_model(
-    MODEL_PATH,
-    compile=False,
-    custom_objects={}
-)
-
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 # -------------------------------
 # Class labels
 # -------------------------------
@@ -108,6 +101,7 @@ if image is not None:
     ax.set_title("Prediction Confidence")
 
     st.pyplot(fig)
+
 
 
 
