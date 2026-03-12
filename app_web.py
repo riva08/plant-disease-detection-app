@@ -14,7 +14,7 @@ if not os.path.exists("leaf_model.h5"):
 
 tf.keras.backend.clear_session()
 
-model = load_model("leaf_model.h5", compile=False)
+model = load_model("leaf_model.h5", compile=False, custom_objects=None)
 
 symptoms = {
 "early_blight": "Brown spots with concentric rings on leaves.",
@@ -74,6 +74,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
