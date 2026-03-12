@@ -14,8 +14,12 @@ if not os.path.exists("leaf_model.h5"):
     gdown.download("https://drive.google.com/uc?id=1oOnRu6MPfHgpUa1aqetQUTeif2Ad3Up5", "leaf_model.h5", quiet=False)
 
 from tensorflow.keras.models import load_model
+import tensorflow as tf
+from tensorflow.keras.models import load_model
 
-model = load_model("leaf_model.h5", compile=False, safe_mode=False)
+tf.keras.backend.clear_session()
+
+model = load_model("leaf_model.h5", compile=False)
 
 symptoms = {
 "early_blight": "Brown spots with concentric rings on leaves.",
@@ -75,6 +79,7 @@ if image is not None:
     st.pyplot(fig)
 
     
+
 
 
 
