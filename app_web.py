@@ -4,6 +4,12 @@ import numpy as np
 import cv2
 from PIL import Image
 import matplotlib.pyplot as plt
+import os
+import gdown
+
+if not os.path.exists("leaf_model.h5"):
+    gdown.download("https://drive.google.com/uc?id=1oOnRu6MPfHgpUa1aqetQUTeif2Ad3Up5", "leaf_model.h5", quiet=False)
+
 model = tf.keras.models.load_model("leaf_model.h5")
 
 symptoms = {
@@ -62,4 +68,5 @@ if image is not None:
     ax.set_title("Prediction Confidence")
 
     st.pyplot(fig)
+
     
