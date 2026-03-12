@@ -104,7 +104,7 @@ if image is not None:
     ax.set_title("Prediction Confidence")
 
     st.pyplot(fig)
-```
+
 
 
 
