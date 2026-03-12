@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -6,45 +7,55 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import os
 import gdown
-
-if not os.path.exists("leaf_model.h5"):
-    gdown.download(
-        "https://drive.google.com/uc?id=1oOnRu6MPfHgpUa1aqetQUTeif2Ad3Up5",
-        "leaf_model.h5",
-        quiet=False,
-        fuzzy=True
-    )
-
 from tensorflow.keras.models import load_model
 
-import tensorflow as tf
-from tensorflow.keras.models import load_model
+# -------------------------------
+# Download model if not present
+# -------------------------------
+MODEL_PATH = "leaf_model.h5"
 
-tf.keras.backend.clear_session()
+if not os.path.exists(MODEL_PATH):
+    url = "https://drive.google.com/uc?id=1oOnRu6MPfHgpUa1aqetQUTeif2Ad3Up5"
+    gdown.download(url, MODEL_PATH, quiet=False)
 
-model = load_model("leaf_model.h5", compile=False)
-model.compile(optimizer="adam", loss="categorical_crossentropy")
+# -------------------------------
+# Load trained model
+# -------------------------------
+model = load_model(MODEL_PATH, compile=False)
 
-
+# -------------------------------
+# Class labels
+# -------------------------------
 classes = ["early_blight", "late_blight", "healthy"]
 
-
+# -------------------------------
+# Symptoms dictionary
+# -------------------------------
 symptoms = {
-"early_blight": "Brown spots with concentric rings on leaves.",
-"late_blight": "Dark irregular lesions that spread rapidly in humid conditions.",
-"healthy": "Leaf shows no disease symptoms."
+    "early_blight": "Brown spots with concentric rings on leaves.",
+    "late_blight": "Dark irregular lesions that spread rapidly in humid conditions.",
+    "healthy": "Leaf shows no disease symptoms."
 }
 
+# -------------------------------
+# Treatment dictionary
+# -------------------------------
 treatment = {
-"early_blight": "Remove infected leaves and apply fungicide.",
-"late_blight": "Use copper fungicide and avoid overhead watering.",
-"healthy": "No treatment required."
+    "early_blight": "Remove infected leaves and apply fungicide.",
+    "late_blight": "Use copper fungicide and avoid overhead watering.",
+    "healthy": "No treatment required."
 }
 
+# -------------------------------
+# Streamlit UI
+# -------------------------------
 st.title("🌿 AI Plant Disease Detection System")
 st.write("Upload or capture a leaf image to detect plant diseases.")
 
-uploaded_file = st.file_uploader("Upload Leaf Image", type=["jpg","png","jpeg","webp"])
+uploaded_file = st.file_uploader(
+    "Upload Leaf Image",
+    type=["jpg", "png", "jpeg", "webp"]
+)
 
 camera_image = st.camera_input("Or Take a Photo")
 
@@ -55,18 +66,22 @@ if uploaded_file is not None:
 
 elif camera_image is not None:
     image = Image.open(camera_image)
+
+# -------------------------------
+# Prediction
+# -------------------------------
 if image is not None:
 
     st.image(image, caption="Selected Leaf Image", use_column_width=True)
 
     img = np.array(image)
-    img = cv2.resize(img,(224,224))
-    img = img/255.0
-    img = np.expand_dims(img,axis=0)
+    img = cv2.resize(img, (224, 224))
+    img = img / 255.0
+    img = np.expand_dims(img, axis=0)
 
     prediction = model.predict(img)
 
-    confidence = np.max(prediction)*100
+    confidence = np.max(prediction) * 100
     result = classes[np.argmax(prediction)]
 
     st.success(f"Prediction: {result}")
@@ -77,6 +92,10 @@ if image is not None:
 
     st.subheader("Recommended Treatment")
     st.write(treatment[result])
+
+    # -------------------------------
+    # Probability Graph
+    # -------------------------------
     probabilities = prediction[0]
 
     fig, ax = plt.subplots()
@@ -85,15 +104,7 @@ if image is not None:
     ax.set_title("Prediction Confidence")
 
     st.pyplot(fig)
-
-    
-
-
-
-
-
-
-
+```
 
 
 
